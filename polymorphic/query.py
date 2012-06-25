@@ -34,7 +34,7 @@ class PolymorphicQuerySet(QuerySet):
     def __init__(self, *args, **kwargs):
         "init our queryset object member variables"
         super(PolymorphicQuerySet, self).__init__(*args, **kwargs)
-        self.polymorphic_disabled = self.model.polymorphic_disabled
+        self.polymorphic_disabled = getattr(self.model, 'polymorphic_disabled', False)
 
     def _clone(self, *args, **kwargs):
         "Django's _clone only copies its own variables, so we need to copy ours here"
